@@ -122,8 +122,7 @@ class SSTx0 {
                 case PLANETS: ExecPLANETS(); break; case REQUEST: ExecREQUEST(); break; case DEATHRAY: ExecDEATHRAY(); break;
                 case FREEZE: ExecFREEZE(); break; case COMPUTER: ExecCOMPUTER(); break; case EMEXIT: ExecEMEXIT(); break;
                 case PROBE: ExecPROBE(); break; */ case COMMANDS: ExecCOMMANDS(); break; /* case SCORE: ExecSCORE(); break;
-                case CLOAK: ExecCLOAK(); break; case CAPTURE: ExecCAPTURE(); break; case HELP: ExecHELP(); break;
-                */
+                case CLOAK: ExecCLOAK(); break; case CAPTURE: ExecCAPTURE(); break; case HELP: ExecHELP(); break; */
 
                 case undefined:
                     con.printf("'%s' is not a valid command.\n\n", cmdstr);
