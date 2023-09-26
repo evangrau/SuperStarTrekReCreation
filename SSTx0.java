@@ -13,6 +13,8 @@ import java.io.Console;
 //   Best wishes,
 //  Dr. Spivey
 
+//TESTING ISH
+
 class SSTx0 {
     private static String cmdstr;
     private static Console con;
