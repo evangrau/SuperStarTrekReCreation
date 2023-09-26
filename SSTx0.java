@@ -151,7 +151,7 @@ class SSTx0 {
 
     static void ExecSRSCAN() {
         int r, c;
-
+        //hello
         char[][] chScan = new char[10][10]; // minor inefficiency here
 
         for (r = 1; r <= 10; r++)
