@@ -16,6 +16,7 @@ import java.io.Console;
 class SSTx0 {
     private static String cmdstr;
     private static Console con;
+    private static String[] arguments;
 
     enum Command {
         SRSCAN,
@@ -85,12 +86,16 @@ class SSTx0 {
 
         while (true) {
             str = con.readLine("COMMAND> ");
-            cmdstr = str.toUpperCase().trim();
+
+            // parse command for arguments
+            arguments = str.toUpperCase().trim().split("\\s+");
+            // get command
+            cmdstr = arguments[0];
 
             Command c = Command.undefined;
 
             for (Command cx : Command.values()) {
-                boolean Matched;
+                boolean matched;
 
                 if (cx.CanAbbrev()) {
                     String cmd = cx.toString();
@@ -100,11 +105,11 @@ class SSTx0 {
 
                     String abrcheck = cmd.substring(0, Math.min(cmdlen, tstlen));
 
-                    Matched = cmdstr.compareTo(abrcheck) == 0;
+                    matched = cmdstr.compareTo(abrcheck) == 0;
                 } else
-                    Matched = cmdstr.compareTo(cx.toString()) == 0;
+                    matched = cmdstr.compareTo(cx.toString()) == 0;
 
-                if (Matched) {
+                if (matched) {
                     c = cx;
                     break;
                 }
