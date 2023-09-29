@@ -67,7 +67,7 @@ class SSTx0 {
             canAbbrev = abrOk;
         }
 
-        public boolean CanAbbrev() {
+        public boolean canAbbrev() {
             return canAbbrev;
         }
     }
@@ -103,7 +103,7 @@ class SSTx0 {
             for (Command cx : Command.values()) {
                 boolean Matched;
 
-                if (cx.CanAbbrev())
+                if (cx.canAbbrev())
                     Matched = compareAbbrev(cmdstr, cx.toString()) == 0;
                 else
                     Matched = cmdstr.compareToIgnoreCase(cx.toString()) == 0;
@@ -162,7 +162,7 @@ class SSTx0 {
                 // case HELP: execHELP(); break;
 
                 case undefined:
-                    con.printf("UNRECOGNIZED COMMAND.\n\n");
+                    con.printf("'%s' is not a command.\n\n", c);
                     break;
 
                 default:
