@@ -1,4 +1,5 @@
 import java.io.Console;
+import java.util.Random;
 
 // Note to CS 374 F23 students:
 //   This is a skeleton to use to get started.  
@@ -18,6 +19,12 @@ import java.io.Console;
 class SSTx0 {
     private static String cmdstr;
     private static Console con;
+    private static final int MAP_SIZE = 8;
+    private static Random rand = new Random();
+
+    private static Ship ship = new Ship(rand.nextInt(MAP_SIZE + 1), rand.nextInt(MAP_SIZE + 1),
+            rand.nextInt(MAP_SIZE + 1),
+            rand.nextInt(MAP_SIZE + 1));
 
     enum Command {
         SRSCAN,
@@ -113,19 +120,43 @@ class SSTx0 {
             }
 
             switch (c) {
-                case SRSCAN: ExecSRSCAN(); break; /* case MOVE: ExecMOVE(); break; case PHASERS: ExecPHASERS(); break;
-                case CALL: ExecCALL(); break; case STATUS: ExecSTATUS(); break; case IMPULSE: ExecIMPULSE(); break;
-                case PHOTONS: ExecPHOTONS(); break; case ABANDON: ExecABANDON(); break; case LRSCAN: ExecLRSCAN(); break;
-                case WARP: ExecWARP(); break; case SHIELDS: ExecSHIELDS(); break; case DESTRUCT: ExecDESTRUCT(); break;
-                case CHART: ExecCHART(); break; case REST: ExecREST(); break; case DOCK: ExecDOCK(); break; */
-                case QUIT: return; /* case DAMAGES: ExecDAMAGES(); break; case REPORT: ExecREPORT(); break;
-                case SENSORS: ExecSENSORS(); break; case ORBIT: ExecORBIT(); break; case TRANSPORT: ExecTRANSPORT(); break;
-                case MINE: ExecMINE(); break; case CRYSTALS: ExecCRYSTALS(); break; case SHUTTLE: ExecSHUTTLE(); break;
-                case PLANETS: ExecPLANETS(); break; case REQUEST: ExecREQUEST(); break; case DEATHRAY: ExecDEATHRAY(); break;
-                case FREEZE: ExecFREEZE(); break; case COMPUTER: ExecCOMPUTER(); break; case EMEXIT: ExecEMEXIT(); break;
-                case PROBE: ExecPROBE(); break; */ case COMMANDS: ExecCOMMANDS(); break; /* case SCORE: ExecSCORE(); break;
-                case CLOAK: ExecCLOAK(); break; case CAPTURE: ExecCAPTURE(); break; case HELP: ExecHELP(); break;
-                */
+                case SRSCAN:
+                    ExecSRSCAN();
+                    break;
+                case MOVE:
+                    ExecMOVE();
+                    break;
+                /*
+                 * case PHASERS: ExecPHASERS(); break;
+                 * case CALL: ExecCALL(); break; case STATUS: ExecSTATUS(); break; case IMPULSE:
+                 * ExecIMPULSE(); break;
+                 * case PHOTONS: ExecPHOTONS(); break; case ABANDON: ExecABANDON(); break; case
+                 * LRSCAN: ExecLRSCAN(); break;
+                 * case WARP: ExecWARP(); break; case SHIELDS: ExecSHIELDS(); break; case
+                 * DESTRUCT: ExecDESTRUCT(); break;
+                 * case CHART: ExecCHART(); break; case REST: ExecREST(); break; case DOCK:
+                 * ExecDOCK(); break;
+                 */
+                case QUIT:
+                    return;
+                /*
+                 * case DAMAGES: ExecDAMAGES(); break; case REPORT: ExecREPORT(); break;
+                 * case SENSORS: ExecSENSORS(); break; case ORBIT: ExecORBIT(); break; case
+                 * TRANSPORT: ExecTRANSPORT(); break;
+                 * case MINE: ExecMINE(); break; case CRYSTALS: ExecCRYSTALS(); break; case
+                 * SHUTTLE: ExecSHUTTLE(); break;
+                 * case PLANETS: ExecPLANETS(); break; case REQUEST: ExecREQUEST(); break; case
+                 * DEATHRAY: ExecDEATHRAY(); break;
+                 * case FREEZE: ExecFREEZE(); break; case COMPUTER: ExecCOMPUTER(); break; case
+                 * EMEXIT: ExecEMEXIT(); break;
+                 * case PROBE: ExecPROBE(); break;
+                 */ case COMMANDS:
+                    ExecCOMMANDS();
+                    break; /*
+                            * case SCORE: ExecSCORE(); break;
+                            * case CLOAK: ExecCLOAK(); break; case CAPTURE: ExecCAPTURE(); break; case
+                            * HELP: ExecHELP(); break;
+                            */
 
                 case undefined:
                     con.printf("'%s' is not a valid command.\n\n", cmdstr);
@@ -238,6 +269,17 @@ class SSTx0 {
         }
 
         con.printf("\n");
+    }
+
+    static void ExecMOVE() {
+        ship.print();
+        /*
+         * Use Evan's command line parsing to get the correct movement
+         * For now, will just move to space 1 1, 1 1
+         */
+        ship.move(1, 1, 1, 1);
+        ship.print();
+
     }
 
 }
