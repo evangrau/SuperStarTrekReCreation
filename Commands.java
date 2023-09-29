@@ -65,7 +65,7 @@ class Commands {
 
     // ================================================
 
-    static void getCommand(Console con, String cmdstr) {
+    static void getCommand(Console con, String cmdstr, Ship ship) {
         Command c = Command.undefined;
 
         for (Command cx : Command.values()) {
@@ -89,7 +89,9 @@ class Commands {
             // case LRSCAN: execLRSCAN(); break;
             // case PHASERS: execPHASERS(); break;
             // case PHOTONS: execPHOTONS(); break;
-            // case MOVE: execMOVE(); break;
+            case MOVE:
+                execMOVE(ship);
+                break;
             // case SHIELDS: execSHIELDS(); break;
             // case DOCK: execDOCK(); break;
             // case DAMAGES: execDAMAGES(); break;
@@ -252,6 +254,16 @@ class Commands {
         }
 
         con.printf("\n");
+    }
+
+    static void execMOVE(Ship ship) {
+        ship.print();
+
+        // For testing for now, ship will just move 1, 1, 1, 1
+        // Will implement with user giving movement commands later
+
+        ship.move(1, 1, 1, 1);
+        ship.print();
     }
 
     static void execCOMPUTER(Console con) {
