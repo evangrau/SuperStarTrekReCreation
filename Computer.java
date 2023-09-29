@@ -3,16 +3,16 @@ import java.util.Scanner;
 
 public class Computer {
     private static int deltaQx, deltaQy;
-    public static int deltaSx, deltaSy = 0;
+    private static int deltaSx, deltaSy = 0;
     private static Console con;
     static Scanner myObj = new Scanner(System.in);
     // temporary values
     private static double starDate = 2516.3;
     private static int[] position = { 5, 1, 2, 4 };
     private static int x = 0;
-    public static double warpF = 5.0;
-    public static double energy = 5000.0;
-    public static double energy_used;
+    private static double warpF = 5.0;
+    private static double energy = 5000.0;
+    private static double energy_used;
 
     public static void computer(int... optionalNumbers) {
         con = System.console();
@@ -123,7 +123,7 @@ public class Computer {
     }
 
     /* Print final calculations based on when user input valid data */
-    public static void results(int b, double dT) {
+    private static void results(int b, double dT) {
         if (b == 0) {
             con.printf("Remaining energy will be %.1f\n", (energy - energy_used));
             con.printf("Minimum warp needed is %.2f\n", warpF);
