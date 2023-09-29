@@ -116,54 +116,20 @@ class SSTx0 {
 
             switch (c) {
                 case SRSCAN:
-<<<<<<< HEAD
-                    ExecSRSCAN();
-                case COMPUTER:
-                    ExecCOMPUTER();
-                    break; /*
-                            * case MOVE: ExecMOVE(); break; case PHASERS: ExecPHASERS(); break;
-                            * case CALL: ExecCALL(); break; case STATUS: ExecSTATUS(); break; case IMPULSE:
-                            * ExecIMPULSE(); break;
-                            * case PHOTONS: ExecPHOTONS(); break; case ABANDON: ExecABANDON(); break; case
-                            * LRSCAN: ExecLRSCAN(); break;
-                            * case WARP: ExecWARP(); break; case SHIELDS: ExecSHIELDS(); break; case
-                            * DESTRUCT: ExecDESTRUCT(); break;
-                            * case CHART: ExecCHART(); break; case REST: ExecREST(); break; case DOCK:
-                            * ExecDOCK(); break;
-                            */
-                case QUIT:
-                    return;
-                /*
-                 * case DAMAGES: ExecDAMAGES(); break; case REPORT: ExecREPORT(); break;
-                 * case SENSORS: ExecSENSORS(); break; case ORBIT: ExecORBIT(); break; case
-                 * TRANSPORT: ExecTRANSPORT(); break;
-                 * case MINE: ExecMINE(); break; case CRYSTALS: ExecCRYSTALS(); break; case
-                 * SHUTTLE: ExecSHUTTLE(); break;
-                 * case PLANETS: ExecPLANETS(); break; case REQUEST: ExecREQUEST(); break; case
-                 * DEATHRAY: ExecDEATHRAY(); break;
-                 * case FREEZE: ExecFREEZE(); break; case COMPUTER: ExecCOMPUTER(); break; case
-                 * EMEXIT: ExecEMEXIT(); break;
-                 * case PROBE: ExecPROBE(); break;
-                 */ case COMMANDS:
-                    ExecCOMMANDS();
-                    break; /*
-                            * case SCORE: ExecSCORE(); break;
-                            * case CLOAK: ExecCLOAK(); break; case CAPTURE: ExecCAPTURE(); break; case
-                            * HELP: ExecHELP(); break;
-                            */
-=======
                     execSRSCAN();
                     break;
-                // case LRSCAN: execLRSCAN(); break;
-                // case PHASERS: execPHASERS(); break;
-                // case PHOTONS: execPHOTONS(); break;
-                // case MOVE: execMOVE(); break;
-                // case SHIELDS: execSHIELDS(); break;
-                // case DOCK: execDOCK(); break;
-                // case DAMAGES: execDAMAGES(); break;
-                // case CHART: execCHART(); break;
-                // case IMPULSE: execIMPULSE(); break;
-                // case REST: execREST(); break;
+                case COMPUTER:
+                    ExecCOMPUTER();
+                    // case LRSCAN: execLRSCAN(); break;
+                    // case PHASERS: execPHASERS(); break;
+                    // case PHOTONS: execPHOTONS(); break;
+                    // case MOVE: execMOVE(); break;
+                    // case SHIELDS: execSHIELDS(); break;
+                    // case DOCK: execDOCK(); break;
+                    // case DAMAGES: execDAMAGES(); break;
+                    // case CHART: execCHART(); break;
+                    // case IMPULSE: execIMPULSE(); break;
+                    // case REST: execREST(); break;
                 case WARP:
                     execWARP();
                     break;
@@ -196,7 +162,6 @@ class SSTx0 {
                     execQUIT();
                     break;
                 // case HELP: execHELP(); break;
->>>>>>> 6c0815d8279bc8482a9fff8f546684556ed3f8a0
 
                 case undefined:
                     con.printf("'%s' is not a command.\n\n", c);
@@ -333,8 +298,6 @@ class SSTx0 {
         // Using given Stardate 2516.3 and Position 5 - 1 2 - 4 and Warp Factor of 5.0
         Computer.computer(4, 3, 1);
     }
-
-}
 
     static void execWARP() {
         Token tkn = CmdProc.getToken();
