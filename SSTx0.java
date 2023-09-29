@@ -133,7 +133,9 @@ class SSTx0 {
                 // case LRSCAN: execLRSCAN(); break;
                 // case PHASERS: execPHASERS(); break;
                 // case PHOTONS: execPHOTONS(); break;
-                // case MOVE: execMOVE(); break;
+                case MOVE:
+                    execMOVE();
+                    break;
                 // case SHIELDS: execSHIELDS(); break;
                 // case DOCK: execDOCK(); break;
                 // case DAMAGES: execDAMAGES(); break;
@@ -297,6 +299,16 @@ class SSTx0 {
         }
 
         con.printf("\n");
+    }
+
+    static void execMOVE() {
+        ship.print();
+
+        // For testing for now, ship will just move 1, 1, 1, 1
+        // Will implement with user giving movement commands later
+
+        ship.move(1, 1, 1, 1);
+        ship.print();
     }
 
     static void ExecCOMPUTER() {
