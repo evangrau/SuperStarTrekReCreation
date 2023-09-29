@@ -16,6 +16,8 @@ public class Computer {
 
     public static void computer(int... optionalNumbers) {
         con = System.console();
+
+        /* Make sure user input the minimum or maximum components necessary */
         if (optionalNumbers.length == 2 || optionalNumbers.length >= 4) {
             deltaQx = (optionalNumbers[0] - position[0]) * 10;
             deltaQy = (optionalNumbers[1] - position[1]) * 10;
@@ -26,19 +28,20 @@ public class Computer {
             }
         }
 
+        /* Error Handler for input */
         else {
             con.printf("\nBeg your pardon, Captain?\n\n");
             return;
         }
 
-        // double dist = Math.sqrt( Math.abs((deltaQx ^ 2) - (deltaQy ^ 2))
-        // Math.abs((deltaSx ^ 2) - (deltaSy ^ 2)) )
-
+        /* Distance Formula */
         double a = Math.abs((deltaQx ^ 2) - (deltaQy ^ 2));
         double b = Math.abs((deltaSx ^ 2) - (deltaSy ^ 2));
         double dist = Math.sqrt(a + b);
 
         con.printf("Answer \"no\" if you don't know the value:\n");
+
+        /* Until user inputs valid time or warp factor */
         while (true) {
             if (x == 0) {
                 con.printf("Time or arrival date? ");
@@ -86,6 +89,7 @@ public class Computer {
         }
 
         con.printf("New warp factor to try?");
+        /* Continuation, stops when an invalid character is used */
         while (myObj.hasNextDouble()) {
             warpF = myObj.nextDouble();
             energy_used = dist * (Math.pow(warpF, 3));
@@ -96,6 +100,10 @@ public class Computer {
         }
     }
 
+    /*
+     * Handler to track how many times user has input invalid text for time or warp
+     * factor
+     */
     private static int eventCaseNo(int y) {
         if (y == 0) {
             return y + 1;
@@ -107,12 +115,14 @@ public class Computer {
         }
     }
 
+    /* Handler for when user inputs invalid starDate */
     private static void eventTimeBehind() {
         con.printf("Remaining Energy will be %.1f.\n", 5000.0);
         con.printf("any warp speed is adequate.\n");
         con.printf("Unfortunately, the Federation will be destroyed by then.\n");
     }
 
+    /* Print final calculations based on when user input valid data */
     public static void results(int b, double dT) {
         if (b == 0) {
             con.printf("Remaining energy will be %.1f\n", (energy - energy_used));
@@ -125,10 +135,4 @@ public class Computer {
             con.printf("and we will arrive at stardate %.1f\n", dT);
         }
     }
-
-    // public static void main(String[] args) {
-
-    // computer(4, 3, 2, 1);
-
-    // }
 }
