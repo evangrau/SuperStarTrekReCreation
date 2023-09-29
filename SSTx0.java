@@ -120,16 +120,17 @@ class SSTx0 {
                     break;
                 case COMPUTER:
                     ExecCOMPUTER();
-                    // case LRSCAN: execLRSCAN(); break;
-                    // case PHASERS: execPHASERS(); break;
-                    // case PHOTONS: execPHOTONS(); break;
-                    // case MOVE: execMOVE(); break;
-                    // case SHIELDS: execSHIELDS(); break;
-                    // case DOCK: execDOCK(); break;
-                    // case DAMAGES: execDAMAGES(); break;
-                    // case CHART: execCHART(); break;
-                    // case IMPULSE: execIMPULSE(); break;
-                    // case REST: execREST(); break;
+                    break;
+                // case LRSCAN: execLRSCAN(); break;
+                // case PHASERS: execPHASERS(); break;
+                // case PHOTONS: execPHOTONS(); break;
+                // case MOVE: execMOVE(); break;
+                // case SHIELDS: execSHIELDS(); break;
+                // case DOCK: execDOCK(); break;
+                // case DAMAGES: execDAMAGES(); break;
+                // case CHART: execCHART(); break;
+                // case IMPULSE: execIMPULSE(); break;
+                // case REST: execREST(); break;
                 case WARP:
                     execWARP();
                     break;
