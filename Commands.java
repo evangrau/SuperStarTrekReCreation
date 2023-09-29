@@ -109,7 +109,9 @@ class Commands {
             // case PLANETS: execPLANETS(); break;
             // case REQUEST: execREQUEST(); break;
             // case REPORT: execREPORT(); break;
-            // case COMPUTER: execCOMPUTER; break;
+            case COMPUTER:
+                execCOMPUTER(con);
+                break;
             case COMMANDS:
                 execCOMMANDS(con);
                 break;
@@ -250,6 +252,16 @@ class Commands {
         }
 
         con.printf("\n");
+    }
+
+    static void execCOMPUTER(Console con) {
+
+        con.printf("Destination quadrant and/or sector? \n");
+        /*
+         * Use Evan's command line parsing to get the destination
+         */
+        // Using given Stardate 2516.3 and Position 5 - 1 2 - 4 and Warp Factor of 5.0
+        Computer.computer(4, 3, 1);
     }
 
     static void execWARP(Console con) {
