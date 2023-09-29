@@ -141,7 +141,9 @@ class SSTx0 {
                 // case PLANETS: execPLANETS(); break;
                 // case REQUEST: execREQUEST(); break;
                 // case REPORT: execREPORT(); break;
-                // case COMPUTER: execCOMPUTER; break;
+                case COMPUTER:
+                    execCOMPUTER();
+                    break;
                 case COMMANDS:
                     execCOMMANDS();
                     break;
@@ -287,7 +289,7 @@ class SSTx0 {
         con.printf("\n");
     }
 
-    static void ExecCOMPUTER() {
+    static void execCOMPUTER() {
 
         con.printf("Destination quadrant and/or sector? \n");
         /*
@@ -296,6 +298,7 @@ class SSTx0 {
         // Using given Stardate 2516.3 and Position 5 - 1 2 - 4 and Warp Factor of 5.0
         Computer.computer(4, 3, 1);
     }
+
     static void execWARP() {
         Token tkn = CmdProc.getToken();
         while (tkn.getType() == TokenType.EOL) {
@@ -343,13 +346,6 @@ class SSTx0 {
 
         con.printf("Engineer Scott- \"Aye, Captain, we'll try it.\"\n\n");
     }
-
-    // static void execCOMPUTER() {
-    // int ix1, ix2, iy1, iy2;
-
-    // Token tkn = CmdProc.getToken();
-
-    // }
 
     static void execQUIT() {
         con.printf("\n\n******************************************************\n");
