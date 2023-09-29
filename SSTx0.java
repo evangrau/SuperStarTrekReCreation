@@ -120,16 +120,17 @@ class SSTx0 {
                     break;
                 case COMPUTER:
                     ExecCOMPUTER();
-                    // case LRSCAN: execLRSCAN(); break;
-                    // case PHASERS: execPHASERS(); break;
-                    // case PHOTONS: execPHOTONS(); break;
-                    // case MOVE: execMOVE(); break;
-                    // case SHIELDS: execSHIELDS(); break;
-                    // case DOCK: execDOCK(); break;
-                    // case DAMAGES: execDAMAGES(); break;
-                    // case CHART: execCHART(); break;
-                    // case IMPULSE: execIMPULSE(); break;
-                    // case REST: execREST(); break;
+                    break;
+                // case LRSCAN: execLRSCAN(); break;
+                // case PHASERS: execPHASERS(); break;
+                // case PHOTONS: execPHOTONS(); break;
+                // case MOVE: execMOVE(); break;
+                // case SHIELDS: execSHIELDS(); break;
+                // case DOCK: execDOCK(); break;
+                // case DAMAGES: execDAMAGES(); break;
+                // case CHART: execCHART(); break;
+                // case IMPULSE: execIMPULSE(); break;
+                // case REST: execREST(); break;
                 case WARP:
                     execWARP();
                     break;
@@ -296,7 +297,7 @@ class SSTx0 {
          * Use Evan's command line parsing to get the destination
          */
         // Using given Stardate 2516.3 and Position 5 - 1 2 - 4 and Warp Factor of 5.0
-        Computer.computer(4, 3, 1);
+        Computer.computer(4, 3, 2, 1);
     }
 
     static void execWARP() {
