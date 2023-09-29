@@ -67,14 +67,21 @@ class SSTx0 {
             canAbbrev = abrOk;
         }
 
-        public boolean CanAbbrev() {
+        public boolean canAbbrev() {
             return canAbbrev;
         }
     }
 
+    // ================================================
+    // legacy status variables
+
+    static double warpfac = 5;
+    static double wfacsq = 5 * 5;
+
+    // ================================================
+
     public static void main(String[] args) {
         // main polling loop
-        String str;
 
         con = System.console();
         if (con == null)
@@ -84,25 +91,22 @@ class SSTx0 {
         con.printf("\n *** Welcome aboard the USS Enterprise (NCC 1701) *** \n\n");
 
         while (true) {
-            str = con.readLine("COMMAND> ");
-            cmdstr = str.toUpperCase().trim();
+            con.printf("COMMAND> ");
+            Token tkn = CmdProc.getToken();
+            if (tkn.getType() == TokenType.EOL)
+                continue;
+
+            cmdstr = tkn.getString();
 
             Command c = Command.undefined;
 
             for (Command cx : Command.values()) {
                 boolean Matched;
 
-                if (cx.CanAbbrev()) {
-                    String cmd = cx.toString();
-
-                    int cmdlen = cmd.length();
-                    int tstlen = cmdstr.length();
-
-                    String abrcheck = cmd.substring(0, Math.min(cmdlen, tstlen));
-
-                    Matched = cmdstr.compareTo(abrcheck) == 0;
-                } else
-                    Matched = cmdstr.compareTo(cx.toString()) == 0;
+                if (cx.canAbbrev())
+                    Matched = compareAbbrev(cmdstr, cx.toString()) == 0;
+                else
+                    Matched = cmdstr.compareToIgnoreCase(cx.toString()) == 0;
 
                 if (Matched) {
                     c = cx;
@@ -112,66 +116,89 @@ class SSTx0 {
 
             switch (c) {
                 case SRSCAN:
-                    ExecSRSCAN();
-                case COMPUTER:
-                    ExecCOMPUTER();
-                    break; /*
-                            * case MOVE: ExecMOVE(); break; case PHASERS: ExecPHASERS(); break;
-                            * case CALL: ExecCALL(); break; case STATUS: ExecSTATUS(); break; case IMPULSE:
-                            * ExecIMPULSE(); break;
-                            * case PHOTONS: ExecPHOTONS(); break; case ABANDON: ExecABANDON(); break; case
-                            * LRSCAN: ExecLRSCAN(); break;
-                            * case WARP: ExecWARP(); break; case SHIELDS: ExecSHIELDS(); break; case
-                            * DESTRUCT: ExecDESTRUCT(); break;
-                            * case CHART: ExecCHART(); break; case REST: ExecREST(); break; case DOCK:
-                            * ExecDOCK(); break;
-                            */
+                    execSRSCAN();
+                    break;
+                // case LRSCAN: execLRSCAN(); break;
+                // case PHASERS: execPHASERS(); break;
+                // case PHOTONS: execPHOTONS(); break;
+                // case MOVE: execMOVE(); break;
+                // case SHIELDS: execSHIELDS(); break;
+                // case DOCK: execDOCK(); break;
+                // case DAMAGES: execDAMAGES(); break;
+                // case CHART: execCHART(); break;
+                // case IMPULSE: execIMPULSE(); break;
+                // case REST: execREST(); break;
+                case WARP:
+                    execWARP();
+                    break;
+                // case STATUS: execSTATUS(); break;
+                // case SENSORS: execSENSORS(); break;
+                // case ORBIT: execORBIT(); break;
+                // case TRANSPORT: execTRANSPORT(); break;
+                // case MINE: execMINE(); break;
+                // case CRYSTALS: execCRYSTALS(); break;
+                // case SHUTTLE: execSHUTTLE(); break;
+                // case PLANETS: execPLANETS(); break;
+                // case REQUEST: execREQUEST(); break;
+                // case REPORT: execREPORT(); break;
+                // case COMPUTER: execCOMPUTER; break;
+                case COMMANDS:
+                    execCOMMANDS();
+                    break;
+                // case EMEXIT: execEMEXIT(); break;
+                // case PROBE: execPROBE(); break;
+                // case CLOAK: execCLOAK(); break;
+                // case CAPTURE: execCAPTURE(); break;
+                // case SCORE: execSCORE(); break;
+                // case ABANDON: execABANDON(); break;
+                // case DESTRUCT: execDESTRUCT(); break;
+                // case FREEZE: execFREEZE(); break;
+                // case DEATHRAY: execDEATHRAY(); break;
+                // case DEBUG: execDEBUG(); break;
+                // case CALL: execCALL(); break;
                 case QUIT:
-                    return;
-                /*
-                 * case DAMAGES: ExecDAMAGES(); break; case REPORT: ExecREPORT(); break;
-                 * case SENSORS: ExecSENSORS(); break; case ORBIT: ExecORBIT(); break; case
-                 * TRANSPORT: ExecTRANSPORT(); break;
-                 * case MINE: ExecMINE(); break; case CRYSTALS: ExecCRYSTALS(); break; case
-                 * SHUTTLE: ExecSHUTTLE(); break;
-                 * case PLANETS: ExecPLANETS(); break; case REQUEST: ExecREQUEST(); break; case
-                 * DEATHRAY: ExecDEATHRAY(); break;
-                 * case FREEZE: ExecFREEZE(); break; case COMPUTER: ExecCOMPUTER(); break; case
-                 * EMEXIT: ExecEMEXIT(); break;
-                 * case PROBE: ExecPROBE(); break;
-                 */ case COMMANDS:
-                    ExecCOMMANDS();
-                    break; /*
-                            * case SCORE: ExecSCORE(); break;
-                            * case CLOAK: ExecCLOAK(); break; case CAPTURE: ExecCAPTURE(); break; case
-                            * HELP: ExecHELP(); break;
-                            */
+                    execQUIT();
+                    break;
+                // case HELP: execHELP(); break;
 
                 case undefined:
-                    con.printf("'%s' is not a valid command.\n\n", cmdstr);
+                    con.printf("'%s' is not a command.\n\n", c);
                     break;
 
                 default:
-                    con.printf("Lt. Cmdr. Scott: \"Captain, '%s' is nae yet operational.\"\n\n", c.toString());
+                    con.printf("Engineer Scott: \"Captain, '%s' is nae yet operational.\"\n\n", c.toString());
                     break;
             }
+
+            CmdProc.flushTok();
         }
     }
 
-    static void ExecCOMMANDS() {
+    static int compareAbbrev(String strAbbr, String strFull) {
+        strAbbr = strAbbr.toUpperCase();
+
+        if (strAbbr.length() >= strFull.length())
+            return strAbbr.compareTo(strFull);
+
+        strFull = strFull.substring(0, strAbbr.length());
+
+        return strAbbr.compareTo(strFull);
+    }
+
+    static void execCOMMANDS() {
         con.printf("   SRSCAN    MOVE      PHASERS   CALL\n");
         con.printf("   STATUS    IMPULSE   PHOTONS   ABANDON\n");
         con.printf("   LRSCAN    WARP      SHIELDS   DESTRUCT\n");
         con.printf("   CHART     REST      DOCK      QUIT\n");
         con.printf("   DAMAGES   REPORT    SENSORS   ORBIT\n");
-        con.printf("   TRANSPORT MINE      CRYSTALS  SHUTTLE\n");
+        con.printf("   TRANSPORT MIHE      CRYSTALS  SHUTTLE\n");
         con.printf("   PLANETS   REQUEST   DEATHRAY  FREEZE\n");
         con.printf("   COMPUTER  EMEXIT    PROBE     COMMANDS\n");
         con.printf("   SCORE     CLOAK     CAPTURE   HELP\n");
         con.printf("\n");
     }
 
-    static void ExecSRSCAN() {
+    static void execSRSCAN() {
         int r, c;
 
         char[][] chScan = new char[10][10]; // minor inefficiency here
@@ -234,7 +261,7 @@ class SSTx0 {
                         con.printf("Life Support  %s", "DAMAGED, Reserves = 2.30");
                         break;
                     case 5:
-                        con.printf("Warp Factor   %.1f", 5.0);
+                        con.printf("Warp Factor   %.1f", warpfac);
                         break;
                     case 6:
                         con.printf("Energy        %.2f", 2176.24);
@@ -268,5 +295,69 @@ class SSTx0 {
          */
         // Using given Stardate 2516.3 and Position 5 - 1 2 - 4 and Warp Factor of 5.0
         Computer.computer(4, 3, 1);
+    }
+    static void execWARP() {
+        Token tkn = CmdProc.getToken();
+        while (tkn.getType() == TokenType.EOL) {
+            con.printf("Warp factor-");
+            tkn = CmdProc.getToken();
+        }
+
+        if (tkn.getType() == TokenType.ALPHA) {
+            huh();
+            return;
+        }
+
+        // MOCK - no damage yet
+
+        double w = tkn.getDouble();
+
+        if (w > 10) {
+            con.printf("Helmsman Sulu- \"Our top speed is warp 10, Captain.\"\n\n");
+            return;
+        }
+
+        if (w < 1.0) {
+            con.printf("Helmsman Sulu- \"We can't go below warp 1, Captain.\"\n\n");
+            return;
+        }
+
+        double oldfac = warpfac;
+        warpfac = w;
+        wfacsq = w * w;
+
+        if ((warpfac <= oldfac) || (warpfac <= 6.0)) {
+            con.printf("Helmsman Sulu- \"Warp factor %.1f, Captain.\"\n\n", warpfac);
+            return;
+        }
+
+        if (warpfac < 8.0) {
+            con.printf("Engineer Scott- \"Aye, but our maximum safe speed is warp 6.\"\n\n");
+            return;
+        }
+
+        if (warpfac < 10.0) {
+            con.printf("Engineer Scott- \"Aye, Captain, but our engines may not take it.\"\n\n");
+            return;
+        }
+
+        con.printf("Engineer Scott- \"Aye, Captain, we'll try it.\"\n\n");
+    }
+
+    // static void execCOMPUTER() {
+    // int ix1, ix2, iy1, iy2;
+
+    // Token tkn = CmdProc.getToken();
+
+    // }
+
+    static void execQUIT() {
+        con.printf("\n\n******************************************************\n");
+        System.exit(0);
+    }
+
+    static void huh() {
+        CmdProc.flushTok();
+        con.printf("Beg your pardon, Captain?\n");
     }
 }
