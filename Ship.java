@@ -1,4 +1,3 @@
-import java.io.Console;
 import java.util.Random;
 /*
  * This file is for handling all variables and commands that have anything to do
