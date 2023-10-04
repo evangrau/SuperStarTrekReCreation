@@ -23,8 +23,7 @@ class SSTx0 {
     private static Random rand = new Random();
 
     private static Ship ship = new Ship(rand.nextInt(MAP_SIZE + 1), rand.nextInt(MAP_SIZE + 1),
-            rand.nextInt(MAP_SIZE + 1),
-            rand.nextInt(MAP_SIZE + 1));
+            rand.nextInt(MAP_SIZE + 1), rand.nextInt(MAP_SIZE + 1));
 
     enum Command {
         SRSCAN,
