@@ -86,52 +86,114 @@ class Commands {
             case SRSCAN:
                 execSRSCAN(con);
                 break;
-            // case LRSCAN: execLRSCAN(); break;
-            // case PHASERS: execPHASERS(); break;
-            // case PHOTONS: execPHOTONS(); break;
-            case MOVE:
-                execMOVE(ship);
-                break;
-            // case SHIELDS: execSHIELDS(); break;
-            // case DOCK: execDOCK(); break;
-            // case DAMAGES: execDAMAGES(); break;
-            // case CHART: execCHART(); break;
-            // case IMPULSE: execIMPULSE(); break;
-            // case REST: execREST(); break;
+            // case LRSCAN:
+            // execLRSCAN();
+            // break;
+            // case PHASERS:
+            // execPHASERS();
+            // break;
+            // case PHOTONS:
+            // execPHOTONS();
+            // break;
+            // case MOVE:
+            // execMOVE(ship);
+            // break;
+            // case SHIELDS:
+            // execSHIELDS();
+            // break;
+            // case DOCK:
+            // execDOCK();
+            // break;
+            // case DAMAGES:
+            // execDAMAGES();
+            // break;
+            // case CHART:
+            // execCHART();
+            // break;
+            // case IMPULSE:
+            // execIMPULSE();
+            // break;
+            // case REST:
+            // execREST();
+            // break;
             case WARP:
                 execWARP(con);
                 break;
-            // case STATUS: execSTATUS(); break;
-            // case SENSORS: execSENSORS(); break;
-            // case ORBIT: execORBIT(); break;
-            // case TRANSPORT: execTRANSPORT(); break;
-            // case MINE: execMINE(); break;
-            // case CRYSTALS: execCRYSTALS(); break;
-            // case SHUTTLE: execSHUTTLE(); break;
-            // case PLANETS: execPLANETS(); break;
-            // case REQUEST: execREQUEST(); break;
-            // case REPORT: execREPORT(); break;
+            // case STATUS:
+            // execSTATUS();
+            // break;
+            // case SENSORS:
+            // execSENSORS();
+            // break;
+            // case ORBIT:
+            // execORBIT();
+            // break;
+            // case TRANSPORT:
+            // execTRANSPORT();
+            // break;
+            // case MINE:
+            // execMINE();
+            // break;
+            // case CRYSTALS:
+            // execCRYSTALS();
+            // break;
+            // case SHUTTLE:
+            // execSHUTTLE();
+            // break;
+            // case PLANETS:
+            // execPLANETS();
+            // break;
+            // case REQUEST:
+            // execREQUEST();
+            // break;
+            // case REPORT:
+            // execREPORT();
+            // break;
             case COMPUTER:
                 execCOMPUTER(con);
                 break;
             case COMMANDS:
                 execCOMMANDS(con);
                 break;
-            // case EMEXIT: execEMEXIT(); break;
-            // case PROBE: execPROBE(); break;
-            // case CLOAK: execCLOAK(); break;
-            // case CAPTURE: execCAPTURE(); break;
-            // case SCORE: execSCORE(); break;
-            // case ABANDON: execABANDON(); break;
-            // case DESTRUCT: execDESTRUCT(); break;
-            // case FREEZE: execFREEZE(); break;
-            // case DEATHRAY: execDEATHRAY(); break;
-            // case DEBUG: execDEBUG(); break;
-            // case CALL: execCALL(); break;
+            // case EMEXIT:
+            // execEMEXIT();
+            // break;
+            // case PROBE:
+            // execPROBE();
+            // break;
+            // case CLOAK:
+            // execCLOAK();
+            // break;
+            // case CAPTURE:
+            // execCAPTURE();
+            // break;
+            // case SCORE:
+            // execSCORE();
+            // break;
+            // case ABANDON:
+            // execABANDON();
+            // break;
+            // case DESTRUCT:
+            // execDESTRUCT();
+            // break;
+            // case FREEZE:
+            // execFREEZE();
+            // break;
+            // case DEATHRAY:
+            // execDEATHRAY();
+            // break;
+            // case DEBUG:
+            // execDEBUG();
+            // break;
+            // case CALL:
+            // execCALL();
+            // break;
             case QUIT:
                 execQUIT(con);
                 break;
-            // case HELP: execHELP(); break;
+            // case HELP:
+            // execHELP();
+            // break;
 
             case undefined:
                 con.printf("'%s' is not a command.\n\n", c);
@@ -256,7 +318,7 @@ class Commands {
         con.printf("\n");
     }
 
-    static void execMOVE(Ship ship) {
+    static void execMOVE(Console con, Ship ship) {
         ship.print();
 
         // For testing for now, ship will just move 1, 1, 1, 1
@@ -332,5 +394,9 @@ class Commands {
     static void huh(Console con) {
         CmdProc.flushTok();
         con.printf("Beg your pardon, Captain?\n");
+    }
+
+    static void execLRSCAN(Console con) { // Not yet implemented
+
     }
 }
