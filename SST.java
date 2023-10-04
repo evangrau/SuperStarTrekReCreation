@@ -16,7 +16,7 @@ import java.util.Random;
 
 //TESTING ISH
 
-class SSTx0 {
+class SST {
     private static String cmdstr;
     private static Console con;
     private static final int MAP_SIZE = 8;
