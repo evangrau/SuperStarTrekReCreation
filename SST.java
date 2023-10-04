@@ -14,8 +14,6 @@ import java.util.Random;
 //   Best wishes,
 //  Dr. Spivey
 
-//TESTING ISH
-
 class SST {
     private static String cmdstr;
     private static Console con;
