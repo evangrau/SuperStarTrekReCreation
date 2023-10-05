@@ -273,7 +273,7 @@ class Commands {
          * Use Evan's command line parsing to get the destination
          */
         // Using given Stardate 2516.3 and Position 5 - 1 2 - 4 and Warp Factor of 5.0
-        Computer.computer(4, 3, 1);
+        Computer.computer(4, 3, 2, 1);
     }
 
     static void execWARP(Console con) {
