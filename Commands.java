@@ -60,8 +60,8 @@ class Commands {
     // ================================================
     // legacy status variables
 
-    static double warpfac = 5;
-    static double wfacsq = 5 * 5;
+    static double warp_factor = 5;
+    static double warp_factor_squared = 5 * 5;
 
     // ================================================
 
@@ -90,7 +90,7 @@ class Commands {
             // case PHASERS: execPHASERS(); break;
             // case PHOTONS: execPHOTONS(); break;
             case MOVE:
-                execMOVE(ship);
+                execMOVE(ship, con);
                 break;
             // case SHIELDS: execSHIELDS(); break;
             // case DOCK: execDOCK(); break;
@@ -160,7 +160,7 @@ class Commands {
         con.printf("   LRSCAN    WARP      SHIELDS   DESTRUCT\n");
         con.printf("   CHART     REST      DOCK      QUIT\n");
         con.printf("   DAMAGES   REPORT    SENSORS   ORBIT\n");
-        con.printf("   TRANSPORT MIHE      CRYSTALS  SHUTTLE\n");
+        con.printf("   TRANSPORT MINE      CRYSTALS  SHUTTLE\n");
         con.printf("   PLANETS   REQUEST   DEATHRAY  FREEZE\n");
         con.printf("   COMPUTER  EMEXIT    PROBE     COMMANDS\n");
         con.printf("   SCORE     CLOAK     CAPTURE   HELP\n");
@@ -230,7 +230,7 @@ class Commands {
                         con.printf("Life Support  %s", "DAMAGED, Reserves = 2.30");
                         break;
                     case 5:
-                        con.printf("Warp Factor   %.1f", warpfac);
+                        con.printf("Warp Factor   %.1f", warp_factor);
                         break;
                     case 6:
                         con.printf("Energy        %.2f", 2176.24);
@@ -256,13 +256,40 @@ class Commands {
         con.printf("\n");
     }
 
-    static void execMOVE(Ship ship) {
+    static void execMOVE(Ship ship, Console con) {
         ship.print();
 
         // For testing for now, ship will just move 1, 1, 1, 1
         // Will implement with user giving movement commands later
 
-        ship.move(1, 1, 1, 1);
+        /* 
+         * Testing move command with new command line parsing
+         * It should work how it's supposed to, you just need to be careful
+         * with how it's implemented.
+         * Use this as an example of how to implement it.
+        */
+        Token tkn = CmdProc.getToken();
+        int[] coords = new int[4];
+        int next = 0;
+
+        if (tkn.getType() == TokenType.EOL) {
+            // wait for user input
+            con.printf("Move to which quadrant and which sector? \n");
+            tkn = CmdProc.getToken();
+        }
+
+        if (tkn.getType() == TokenType.ALPHA) {
+            huh(con);
+            return;
+        }
+
+        while (tkn.getType() != TokenType.EOL) {
+            coords[next++] = (int) tkn.getDouble();
+            tkn = CmdProc.getToken();
+        }
+
+        // ship.move(1, 1, 1, 1);
+        ship.move(coords[0], coords[1], coords[2], coords[3]);
         ship.print();
     }
 
@@ -302,21 +329,21 @@ class Commands {
             return;
         }
 
-        double oldfac = warpfac;
-        warpfac = w;
-        wfacsq = w * w;
+        double old_warp_factor = warp_factor;
+        warp_factor = w;
+        warp_factor_squared = w * w;
 
-        if ((warpfac <= oldfac) || (warpfac <= 6.0)) {
-            con.printf("Helmsman Sulu- \"Warp factor %.1f, Captain.\"\n\n", warpfac);
+        if ((warp_factor <= old_warp_factor) || (warp_factor <= 6.0)) {
+            con.printf("Helmsman Sulu- \"Warp factor %.1f, Captain.\"\n\n", warp_factor);
             return;
         }
 
-        if (warpfac < 8.0) {
+        if (warp_factor < 8.0) {
             con.printf("Engineer Scott- \"Aye, but our maximum safe speed is warp 6.\"\n\n");
             return;
         }
 
-        if (warpfac < 10.0) {
+        if (warp_factor < 10.0) {
             con.printf("Engineer Scott- \"Aye, Captain, but our engines may not take it.\"\n\n");
             return;
         }

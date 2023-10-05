@@ -20,7 +20,9 @@ class SST {
     private static final int MAP_SIZE = 8;
     private static Random rand = new Random();
 
-    private static Ship ship = new Ship(rand.nextInt(MAP_SIZE + 1), rand.nextInt(MAP_SIZE + 1),
+    private static Ship ship = new Ship(
+            rand.nextInt(MAP_SIZE + 1),
+            rand.nextInt(MAP_SIZE + 1),
             rand.nextInt(MAP_SIZE + 1),
             rand.nextInt(MAP_SIZE + 1));
 

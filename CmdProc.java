@@ -10,7 +10,7 @@ class CmdProc {
         if (splitter == null) {
             String cmdln = System.console().readLine();
             // tokenizer = new StringTokenizer(cmdln, " ");
-            splitter = new StringSplitter(cmdln, " +");
+            splitter = new StringSplitter(cmdln, " ");
         }
 
         // if (tokenizer.hasMoreTokens() == false)
@@ -45,6 +45,7 @@ class StringSplitter {
 
     StringSplitter(String str, String regex) {
         split = str.split(regex);
+        for (int i = 0; i < split.length; i++)
         index = (split.length > 0) ? 0 : -1;
     }
 
