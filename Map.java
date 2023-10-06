@@ -7,7 +7,7 @@ import java.util.Random;
 class Map {
     private int quadSize, sectSize;
     private int[][] lrMap;
-    private char[][][][] globalMap;
+    public char[][][][] globalMap;
     private double starbaseRate = 0.01, klingonRate = 0.02, commanderRate = 0.005, supercommanderRate = 0.001,
             planetRate = 0.005, romulonRate = 0.005, starRate = 0.1;
     private static Random rand = new Random();
