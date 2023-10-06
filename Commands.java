@@ -65,7 +65,10 @@ class Commands {
 
     // ================================================
 
-    static void getCommand(Console con, String cmdstr, Ship ship) {
+    private static final int QUAD_SIZE = 8;
+    private static final int SECT_SIZE = 10;
+
+    static void getCommand(Console con, String cmdstr, Ship ship, Map map) {
         Command c = Command.undefined;
 
         for (Command cx : Command.values()) {
@@ -86,52 +89,114 @@ class Commands {
             case SRSCAN:
                 execSRSCAN(con);
                 break;
-            // case LRSCAN: execLRSCAN(); break;
-            // case PHASERS: execPHASERS(); break;
-            // case PHOTONS: execPHOTONS(); break;
-            case MOVE:
-                execMOVE(ship, con);
+            // case LRSCAN:
+            // execLRSCAN();
+            // break;
+            // case PHASERS:
+            // execPHASERS();
+            // break;
+            // case PHOTONS:
+            // execPHOTONS();
+            // break;
+            // case MOVE:
+            // execMOVE(ship);
+            // break;
+            // case SHIELDS:
+            // execSHIELDS();
+            // break;
+            // case DOCK:
+            // execDOCK();
+            // break;
+            // case DAMAGES:
+            // execDAMAGES();
+            // break;
+            case CHART:
+                execCHART(con, ship, map, con);
                 break;
-            // case SHIELDS: execSHIELDS(); break;
-            // case DOCK: execDOCK(); break;
-            // case DAMAGES: execDAMAGES(); break;
-            // case CHART: execCHART(); break;
-            // case IMPULSE: execIMPULSE(); break;
-            // case REST: execREST(); break;
+            // case IMPULSE:
+            // execIMPULSE();
+            // break;
+            // case REST:
+            // execREST();
+            // break;
             case WARP:
                 execWARP(con);
                 break;
-            // case STATUS: execSTATUS(); break;
-            // case SENSORS: execSENSORS(); break;
-            // case ORBIT: execORBIT(); break;
-            // case TRANSPORT: execTRANSPORT(); break;
-            // case MINE: execMINE(); break;
-            // case CRYSTALS: execCRYSTALS(); break;
-            // case SHUTTLE: execSHUTTLE(); break;
-            // case PLANETS: execPLANETS(); break;
-            // case REQUEST: execREQUEST(); break;
-            // case REPORT: execREPORT(); break;
+            // case STATUS:
+            // execSTATUS();
+            // break;
+            // case SENSORS:
+            // execSENSORS();
+            // break;
+            // case ORBIT:
+            // execORBIT();
+            // break;
+            // case TRANSPORT:
+            // execTRANSPORT();
+            // break;
+            // case MINE:
+            // execMINE();
+            // break;
+            // case CRYSTALS:
+            // execCRYSTALS();
+            // break;
+            // case SHUTTLE:
+            // execSHUTTLE();
+            // break;
+            // case PLANETS:
+            // execPLANETS();
+            // break;
+            // case REQUEST:
+            // execREQUEST();
+            // break;
+            // case REPORT:
+            // execREPORT();
+            // break;
             case COMPUTER:
                 execCOMPUTER(con);
                 break;
             case COMMANDS:
                 execCOMMANDS(con);
                 break;
-            // case EMEXIT: execEMEXIT(); break;
-            // case PROBE: execPROBE(); break;
-            // case CLOAK: execCLOAK(); break;
-            // case CAPTURE: execCAPTURE(); break;
-            // case SCORE: execSCORE(); break;
-            // case ABANDON: execABANDON(); break;
-            // case DESTRUCT: execDESTRUCT(); break;
-            // case FREEZE: execFREEZE(); break;
-            // case DEATHRAY: execDEATHRAY(); break;
-            // case DEBUG: execDEBUG(); break;
-            // case CALL: execCALL(); break;
+            // case EMEXIT:
+            // execEMEXIT();
+            // break;
+            // case PROBE:
+            // execPROBE();
+            // break;
+            // case CLOAK:
+            // execCLOAK();
+            // break;
+            // case CAPTURE:
+            // execCAPTURE();
+            // break;
+            // case SCORE:
+            // execSCORE();
+            // break;
+            // case ABANDON:
+            // execABANDON();
+            // break;
+            // case DESTRUCT:
+            // execDESTRUCT();
+            // break;
+            // case FREEZE:
+            // execFREEZE();
+            // break;
+            // case DEATHRAY:
+            // execDEATHRAY();
+            // break;
+            // case DEBUG:
+            // execDEBUG();
+            // break;
+            // case CALL:
+            // execCALL();
+            // break;
             case QUIT:
                 execQUIT(con);
                 break;
-            // case HELP: execHELP(); break;
+            // case HELP:
+            // execHELP();
+            // break;
 
             case undefined:
                 con.printf("'%s' is not a command.\n\n", c);
@@ -256,18 +321,18 @@ class Commands {
         con.printf("\n");
     }
 
-    static void execMOVE(Ship ship, Console con) {
+    static void execMOVE(Console con, Ship ship) {
         ship.print();
 
         // For testing for now, ship will just move 1, 1, 1, 1
         // Will implement with user giving movement commands later
 
-        /* 
+        /*
          * Testing move command with new command line parsing
          * It should work how it's supposed to, you just need to be careful
          * with how it's implemented.
          * Use this as an example of how to implement it.
-        */
+         */
         Token tkn = CmdProc.getToken();
         int[] coords = new int[4];
         int next = 0;
@@ -359,5 +424,26 @@ class Commands {
     static void huh(Console con) {
         CmdProc.flushTok();
         con.printf("Beg your pardon, Captain?\n");
+    }
+
+    static void execLRSCAN(Console con) { // Not yet implemented
+
+    }
+
+    static void execCHART(Console con, Ship ship, Map map) {
+        // TEMPORARY TESTING OF MAP
+        con.printf(" ");
+        for (int i = 0; i < SECT_SIZE; i++) {
+            con.printf(String.valueOf(i));
+        }
+        con.printf("\n");
+
+        for (int i = 0; i < SECT_SIZE; i++) {
+            con.printf(String.valueOf(i) + " ");
+            for (int j = 0; j < SECT_SIZE; j++) {
+                con.printf(String.valueOf((map.getMap()[ship.getXQuad()][ship.getYQuad()][i][j])));
+            }
+            con.printf("\n");
+        }
     }
 }

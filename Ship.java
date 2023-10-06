@@ -35,4 +35,20 @@ class Ship {
         sectx += sx;
         secty += sy;
     }
+
+    public int getXQuad() {
+        return quadx;
+    }
+
+    public int getYQuad() {
+        return quady;
+    }
+
+    public int getXSect() {
+        return sectx;
+    }
+
+    public int getYSect() {
+        return secty;
+    }
 }
