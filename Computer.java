@@ -63,7 +63,7 @@ public class Computer {
                         warpF = Math.sqrt(warpF);
 
                         energy_used = dist * (Math.pow(warpF, 3));
-                        results(0, deltaT);
+                        results(0, destinationTime);
                         break;
                     }
 
@@ -80,7 +80,7 @@ public class Computer {
                     warpF = myObj.nextDouble();
                     energy_used = dist * (Math.pow(warpF, 3));
                     double warp_speed = (Math.pow(warpF, 2) / 10);
-                    double deltaT = dist / warp_speed;
+                    double deltaT = starDate + (dist / warp_speed);
                     results(1, deltaT);
                     break;
                 }
