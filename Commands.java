@@ -111,7 +111,7 @@ class Commands {
             // execDAMAGES();
             // break;
             case CHART:
-                execCHART(con, ship, map, con);
+                execCHART(con, ship, map);
                 break;
             // case IMPULSE:
             // execIMPULSE();
