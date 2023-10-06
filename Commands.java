@@ -65,7 +65,10 @@ class Commands {
 
     // ================================================
 
-    static void getCommand(Console con, String cmdstr, Ship ship) {
+    private static final int QUAD_SIZE = 8;
+    private static final int SECT_SIZE = 10;
+
+    static void getCommand(Console con, String cmdstr, Ship ship, Map map) {
         Command c = Command.undefined;
 
         for (Command cx : Command.values()) {
@@ -107,9 +110,9 @@ class Commands {
             // case DAMAGES:
             // execDAMAGES();
             // break;
-            // case CHART:
-            // execCHART();
-            // break;
+            case CHART:
+                execCHART(con, ship, map);
+                break;
             // case IMPULSE:
             // execIMPULSE();
             // break;
@@ -398,5 +401,22 @@ class Commands {
 
     static void execLRSCAN(Console con) { // Not yet implemented
 
+    }
+
+    static void execCHART(Console con, Ship ship, Map map) {
+        // TEMPORARY TESTING OF MAP
+        con.printf(" ");
+        for (int i = 0; i < SECT_SIZE; i++) {
+            con.printf(String.valueOf(i));
+        }
+        con.printf("\n");
+
+        for (int i = 0; i < SECT_SIZE; i++) {
+            con.printf(String.valueOf(i) + " ");
+            for (int j = 0; j < SECT_SIZE; j++) {
+                con.printf(String.valueOf((map.getMap()[ship.getXQuad()][ship.getYQuad()][i][j])));
+            }
+            con.printf("\n");
+        }
     }
 }

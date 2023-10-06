@@ -21,11 +21,16 @@ class SST {
     private static final int SECT_SIZE = 10;
     private static Random rand = new Random();
 
+    // initializing ship and map
     private static Ship ship = new Ship(rand.nextInt(QUAD_SIZE + 1), rand.nextInt(QUAD_SIZE + 1),
             rand.nextInt(SECT_SIZE + 1), rand.nextInt(SECT_SIZE + 1));
 
+    private static Map map = new Map(QUAD_SIZE, SECT_SIZE);
+
     public static void main(String[] args) {
         // main polling loop
+
+        map.populate(ship.getXQuad(), ship.getYQuad(), ship.getXSect(), ship.getYSect());
 
         con = System.console();
         if (con == null)
@@ -42,7 +47,7 @@ class SST {
 
             cmdstr = tkn.getString();
 
-            Commands.getCommand(con, cmdstr, ship);
+            Commands.getCommand(con, cmdstr, ship, map);
 
             CmdProc.flushTok();
         }
