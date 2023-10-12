@@ -60,8 +60,8 @@ class Commands {
     // ================================================
     // legacy status variables
 
-    static double warp_factor = 5;
-    static double warp_factor_squared = 5 * 5;
+    static double warpFactor = 5;
+    static double warpFactorSquared = 5 * 5;
 
     // ================================================
 
@@ -89,9 +89,9 @@ class Commands {
             case SRSCAN:
                 execSRSCAN(con);
                 break;
-            // case LRSCAN:
-            // execLRSCAN();
-            // break;
+            case LRSCAN:
+                execLRSCAN(con);
+                break;
             // case PHASERS:
             // execPHASERS();
             // break;
@@ -233,7 +233,11 @@ class Commands {
     }
 
     static void execSRSCAN(Console con) {
-        srscan.srReport();
+        srscan.srReport(con);
+    }
+
+    static void execLRSCAN(Console con) {
+        lrscan.lrReport(con);
     }
 
     static void execMOVE(Console con, Ship ship) {
@@ -309,21 +313,21 @@ class Commands {
             return;
         }
 
-        double old_warp_factor = warp_factor;
-        warp_factor = w;
-        warp_factor_squared = w * w;
+        double oldWarpFactor = warpFactor;
+        warpFactor = w;
+        warpFactorSquared = w * w;
 
-        if ((warp_factor <= old_warp_factor) || (warp_factor <= 6.0)) {
-            con.printf("Helmsman Sulu- \"Warp factor %.1f, Captain.\"\n\n", warp_factor);
+        if ((warpFactor <= oldWarpFactor) || (warpFactor <= 6.0)) {
+            con.printf("Helmsman Sulu- \"Warp factor %.1f, Captain.\"\n\n", warpFactor);
             return;
         }
 
-        if (warp_factor < 8.0) {
+        if (warpFactor < 8.0) {
             con.printf("Engineer Scott- \"Aye, but our maximum safe speed is warp 6.\"\n\n");
             return;
         }
 
-        if (warp_factor < 10.0) {
+        if (warpFactor < 10.0) {
             con.printf("Engineer Scott- \"Aye, Captain, but our engines may not take it.\"\n\n");
             return;
         }
@@ -339,10 +343,6 @@ class Commands {
     static void huh(Console con) {
         CmdProc.flushTok();
         con.printf("Beg your pardon, Captain?\n");
-    }
-
-    static void execLRSCAN(Console con) { // Not yet implemented
-
     }
 
     static void execCHART(Console con, Ship ship, Map map) {

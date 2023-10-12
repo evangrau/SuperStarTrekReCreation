@@ -1,0 +1,81 @@
+import java.io.Console;
+
+public class lrscan {
+    private static int[][] lrScan = new int[3][3];
+    private static char[][] data = new char[3][3];
+    private static char[][][][] fullMap = SST.map.getMap();
+    private static Ship lr_ship = SST.ship;
+
+    public static void lrReport(Console con) {
+        int xQuad = lr_ship.getXQuad();
+        int yQuad = lr_ship.getYQuad();
+        con.printf("\nLong-range scan for Quadrant %d - %d\n\n", xQuad, yQuad);
+
+        if (xQuad == 1) {
+            for (int i = 0; i < lrScan.length; i++) {
+                lrScan[0][i] = -1;
+            }
+        }
+
+        if (yQuad == 1) {
+            for (int i = 0; i < lrScan.length; i++) {
+                lrScan[i][0] = -1;
+            }
+        }
+
+        for (int r = -1; r < 2; r++) {
+            for (int c = -1; c < 2; c++) {
+
+                // check for edge of map
+                if (lrScan[r + 1][c + 1] == -1) {
+                    continue;
+                }
+
+                // get data for each quadrant
+                data = fullMap[xQuad + r][yQuad + c];
+
+                int klingons = 0;
+                int starbases = 0;
+                int stars = 0;
+
+                // count klingons, starbases, and stars
+                for (int i = 0; i < data.length; i++) {
+                    for (int j = 0; j < data.length; j++) {
+                        switch (data[i][j]) {
+                            case 'K':
+                                klingons++;
+                                break;
+                            case 'B':
+                                starbases++;
+                                break;
+                            case '*':
+                                stars++;
+                                break;
+                        }
+                    }
+                }
+
+                // make 3 digit number for each quadrant
+                String quadData = String.valueOf(klingons) + String.valueOf(starbases) + String.valueOf(stars);
+                int quadDataInt = Integer.parseInt(quadData);
+
+                // if no data, there was a supernova
+                if (quadDataInt == 0) {
+                    quadDataInt = 1000;
+                }
+
+                lrScan[r + 1][c + 1] = quadDataInt;
+            }
+        }
+
+        // print lrscan matrix
+        for (int i = 0; i < lrScan.length; i++) {
+            con.printf("    ");
+            for (int j = 0; j < lrScan.length; j++) {
+                con.printf("%d ", lrScan[i][j]);
+            }
+            con.printf("\n");
+        }
+        con.printf("\n");
+    }
+}

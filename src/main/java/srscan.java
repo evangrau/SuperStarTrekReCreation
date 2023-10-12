@@ -3,12 +3,10 @@ import java.util.Arrays;
 
 public class srscan {
     private static char[][] srScan = new char[10][10]; // minor inefficiency here
-    private static Console con;
     private static char[][][][] fullMap = SST.map.getMap();
     private static Ship sr_ship = SST.ship;
 
-    public static void srReport() {
-        con = System.console();
+    public static void srReport(Console con) {
         int XQuad = sr_ship.getXQuad();
         int YQuad = sr_ship.getYQuad();
 
