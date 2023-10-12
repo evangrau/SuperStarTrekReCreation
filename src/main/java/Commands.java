@@ -89,9 +89,9 @@ class Commands {
             case SRSCAN:
                 execSRSCAN(con);
                 break;
-            // case LRSCAN:
-            // execLRSCAN();
-            // break;
+            case LRSCAN:
+                execLRSCAN(con);
+                break;
             // case PHASERS:
             // execPHASERS();
             // break;
@@ -233,7 +233,11 @@ class Commands {
     }
 
     static void execSRSCAN(Console con) {
-        srscan.srReport();
+        srscan.srReport(con);
+    }
+
+    static void execLRSCAN(Console con) {
+        lrscan.lrReport(con);
     }
 
     static void execMOVE(Console con, Ship ship) {
@@ -339,10 +343,6 @@ class Commands {
     static void huh(Console con) {
         CmdProc.flushTok();
         con.printf("Beg your pardon, Captain?\n");
-    }
-
-    static void execLRSCAN(Console con) { // Not yet implemented
-
     }
 
     static void execCHART(Console con, Ship ship, Map map) {
