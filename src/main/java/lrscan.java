@@ -1,7 +1,7 @@
 import java.io.Console;
 
 public class lrscan {
-    private static int[][] lrScan = new int[3][3];
+    private static String[][] lrScan = new String[3][3];
     private static char[][] data = new char[3][3];
     private static char[][][][] fullMap = SST.map.getMap();
     private static Ship lr_ship = SST.ship;
@@ -13,13 +13,13 @@ public class lrscan {
 
         if (xQuad == 1) {
             for (int i = 0; i < lrScan.length; i++) {
-                lrScan[0][i] = -1;
+                lrScan[0][i] = "-1";
             }
         }
 
         if (yQuad == 1) {
             for (int i = 0; i < lrScan.length; i++) {
-                lrScan[i][0] = -1;
+                lrScan[i][0] = "-1";
             }
         }
 
@@ -27,7 +27,7 @@ public class lrscan {
             for (int c = -1; c < 2; c++) {
 
                 // check for edge of map
-                if (lrScan[r + 1][c + 1] == -1) {
+                if (lrScan[r + 1][c + 1] == "-1") {
                     continue;
                 }
 
@@ -57,14 +57,13 @@ public class lrscan {
 
                 // make 3 digit number for each quadrant
                 String quadData = String.valueOf(klingons) + String.valueOf(starbases) + String.valueOf(stars);
-                int quadDataInt = Integer.parseInt(quadData);
 
                 // if no data, there was a supernova
-                if (quadDataInt == 0) {
-                    quadDataInt = 1000;
+                if (quadData == "000") {
+                    quadData = "1000";
                 }
 
-                lrScan[r + 1][c + 1] = quadDataInt;
+                lrScan[r + 1][c + 1] = quadData;
             }
         }
 
