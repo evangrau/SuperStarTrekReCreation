@@ -98,9 +98,9 @@ class Commands {
             // case PHOTONS:
             // execPHOTONS();
             // break;
-            // case MOVE:
-            // execMOVE(ship);
-            // break;
+            case MOVE:
+                execMOVE(con, ship);
+                break;
             // case SHIELDS:
             // execSHIELDS();
             // break;
