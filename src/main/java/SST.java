@@ -55,4 +55,12 @@ class SST {
             CmdProc.flushTok();
         }
     }
+
+    public int getQuadSize() {
+        return QUAD_SIZE;
+    }
+
+    public int getSectSize() {
+        return SECT_SIZE;
+    }
 }

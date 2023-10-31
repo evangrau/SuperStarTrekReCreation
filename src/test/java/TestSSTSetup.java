@@ -1,6 +1,7 @@
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
+
 import org.junit.Rule;
 
 // import org.junit.runner.Description;
@@ -15,12 +16,18 @@ import java.util.ArrayList;
  * Unit tests
  */
 // @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestShip {
+public class TestSSTSetup {
+
+    SSTSetup s = new SSTSetup();
+    SSTSetup.Klingon k = s.new Klingon(1, 1, 1, 1);
 
     @Test
     public void test1() {
-        Ship ship = new Ship(1,1,1,1);
+        assertTrue(k.hp == 200 && k.energy == 400);
+    }
 
-        assertTrue(ship.getXQuad() == 1 && ship.getYQuad() == 1 && ship.getXSect() == 1 && ship.getYSect() == 1);
+    @Test
+    public void test2() {
+        assertTrue(k.xquad == 1 && k.yquad == 1 && k.xsec == 1 && k.ysec == 1);
     }
 }
