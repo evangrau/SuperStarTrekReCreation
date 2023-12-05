@@ -95,9 +95,9 @@ class Commands {
             // case PHASERS:
             // execPHASERS();
             // break;
-            // case PHOTONS:
-            // execPHOTONS();
-            // break;
+            case PHOTONS:
+                execPHOTONS(con);
+                break;
             case MOVE:
                 execMOVE(con, ship);
                 break;
@@ -275,6 +275,10 @@ class Commands {
         // ship.move(1, 1, 1, 1);
         ship.move(coords[0], coords[1], coords[2], coords[3]);
         ship.print();
+    }
+
+    static void execPHOTONS(Console con) {
+        Photons.fire(con);
     }
 
     static void execCOMPUTER(Console con) {
