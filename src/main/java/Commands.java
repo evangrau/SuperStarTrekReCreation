@@ -346,7 +346,7 @@ class Commands {
 
     static void huh(Console con) {
         CmdProc.flushTok();
-        con.printf("Beg your pardon, Captain?\n");
+        con.printf("\nBeg your pardon, Captain?\n\n");
     }
 
     static void execCHART(Console con, Ship ship, Map map) {

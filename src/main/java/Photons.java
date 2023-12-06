@@ -35,12 +35,19 @@ public class Photons {
                     sectors[i][1] = -1;
                 }
 
+                photonTorpedoes -= (int) t;
+
                 while (count <= t) {
                     Token tkn1 = CmdProc.getToken();
-                    Token tkn2 = CmdProc.getToken();
                     while (tkn1.getType() == TokenType.EOL) {
-                        con.printf("Target sector for torpedo number %d-", count);
+                        con.printf("Target sector x for torpedo number %d-", count);
                         tkn1 = CmdProc.getToken();
+                    }
+
+                    Token tkn2 = CmdProc.getToken();
+                    while (tkn2.getType() == TokenType.EOL) {
+                        con.printf("Target sector y for torpedo number %d-", count);
+                        tkn2 = CmdProc.getToken();
                     }
 
                     if (tkn1.getType() == TokenType.ALPHA || tkn2.getType() == TokenType.ALPHA) {
@@ -62,8 +69,6 @@ public class Photons {
                     count++;
                 }
 
-                photonTorpedoes -= count;
-
                 count = 1;
                 while (count <= t) {
                     int x = sectors[count - 1][0];
@@ -71,34 +76,31 @@ public class Photons {
 
                     if (x != -1 && y != -1) {
                         if (map[SST.ship.getXQuad()][SST.ship.getYQuad()][x][y] == 'K' ||
-                        map[SST.ship.getXQuad()][SST.ship.getYQuad()][x][y] == 'C' ||
-                        map[SST.ship.getXQuad()][SST.ship.getYQuad()][x][y] == 'S') {
+                                map[SST.ship.getXQuad()][SST.ship.getYQuad()][x][y] == 'C' ||
+                                map[SST.ship.getXQuad()][SST.ship.getYQuad()][x][y] == 'S') {
                             if (map[SST.ship.getXQuad()][SST.ship.getYQuad()][x][y] == 'K') {
-                                con.printf("***Klingon at Sector %d - %d destroyed.\n\n", x, y);
+                                con.printf("\n***Klingon at Sector %d - %d destroyed.\n\n", x, y);
+                            } else if (map[SST.ship.getXQuad()][SST.ship.getYQuad()][x][y] == 'C') {
+                                con.printf("\n***Commander at Sector %d - %d destroyed.\n\n", x, y);
+                            } else {
+                                con.printf("\n***Super Commander at Sector %d - %d destroyed.\n\n", x, y);
                             }
-                            else if (map[SST.ship.getXQuad()][SST.ship.getYQuad()][x][y] == 'C') {
-                                con.printf("***Commander at Sector %d - %d destroyed.\n\n", x, y);
-                            }
-                            else {
-                                con.printf("***Super Commander at Sector %d - %d destroyed.\n\n", x, y);
-                            }
+                            SST.map.klingonCount--;
                             map[SST.ship.getXQuad()][SST.ship.getYQuad()][x][y] = '.';
-                        }
-                        else if (map[SST.ship.getXQuad()][SST.ship.getYQuad()][x][y] == '*') {
-                            con.printf("***Star at Sector %d - %d novas.\n\n", x, y);
+                        } else if (map[SST.ship.getXQuad()][SST.ship.getYQuad()][x][y] == '*') {
+                            con.printf("\n***Star at Sector %d - %d novas.\n\n", x, y);
                             map[SST.ship.getXQuad()][SST.ship.getYQuad()][x][y] = '.';
-                        }
-                        else {
-                            con.printf("Torpedo missed.\n\n");
+                        } else {
+                            con.printf("\nTorpedo missed.\n\n");
                         }
                     }
 
                     count++;
                 }
-                    
+
             }
             SST.map.globalMap = map;
         }
-        con.printf("No photon torpedoes left.\n");
+        con.printf("\nNo photon torpedoes left.\n");
     }
 }

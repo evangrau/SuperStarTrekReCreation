@@ -8,6 +8,7 @@ class Map {
     private int quadSize, sectSize;
     private int[][] lrMap;
     public char[][][][] globalMap;
+    public int klingonCount = 0;
 
     private double starbaseRate = 0.01, klingonRate = 0.02, commanderRate = 0.005, supercommanderRate = 0.001,
             planetRate = 0.005, romulonRate = 0.005, starRate = 0.1;
@@ -38,10 +39,13 @@ class Map {
                             globalMap[i][j][k][l] = 'B';
                         } else if (Math.random() < klingonRate) {
                             globalMap[i][j][k][l] = 'K';
+                            klingonCount++;
                         } else if (Math.random() < commanderRate) {
                             globalMap[i][j][k][l] = 'C';
+                            klingonCount++;
                         } else if (Math.random() < supercommanderRate) {
                             globalMap[i][j][k][l] = 'S';
+                            klingonCount++;
                         } else if (Math.random() < planetRate) {
                             globalMap[i][j][k][l] = 'P';
                         } else if (Math.random() < romulonRate) {
