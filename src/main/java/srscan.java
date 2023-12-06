@@ -42,7 +42,7 @@ public class srscan {
                 con.printf("    %2d  ", r);
 
                 for (c = 1; c <= 10; c++)
-                    con.printf("%c ", srScan[r - 1][c - 1]);
+                    con.printf("%c ", srScan[r][c]);
             }
 
             if (rightside) {

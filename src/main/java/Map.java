@@ -18,21 +18,22 @@ class Map {
         quadSize = qSize;
         sectSize = sSize;
 
-        lrMap = new int[quadSize][quadSize];
-        globalMap = new char[quadSize][quadSize][sectSize][sectSize];
+        lrMap = new int[quadSize + 1][quadSize + 1];
+        globalMap = new char[quadSize + 1][quadSize + 1][sectSize + 1][sectSize + 1];
     }
 
     public char[][][][] getMap() {
         return globalMap;
     }
 
-    public void populate(int shipxq, int shipyq, int shipxs, int shipys) { // populating the map
+    public void populate(int shipxq, int shipyq, int shipxs, int shipys, Console con) { // populating the map
         boolean ship;
-        for (int i = 0; i < quadSize; i++) {
-            for (int j = 0; j < quadSize; j++) {
-                for (int k = 0; k < sectSize; k++) {
-                    for (int l = 0; l < sectSize; l++) {
+        for (int i = 1; i <= quadSize; i++) {
+            for (int j = 1; j <= quadSize; j++) {
+                for (int k = 1; k <= sectSize; k++) {
+                    for (int l = 1; l <= sectSize; l++) {
                         if (shipxq == i && shipyq == j && shipxs == k && shipys == l) {
+                            con.printf("The ship is being created at" + i + j + k + l);
                             globalMap[i][j][k][l] = 'E';
                         } else if (Math.random() < starbaseRate) {
                             globalMap[i][j][k][l] = 'B';
