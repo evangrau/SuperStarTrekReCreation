@@ -71,7 +71,7 @@ public class lrscan {
         for (int i = 0; i < lrScan.length; i++) {
             con.printf("    ");
             for (int j = 0; j < lrScan.length; j++) {
-                con.printf("%d ", lrScan[i][j]);
+                con.printf("%s ", lrScan[i][j]);
             }
             con.printf("\n");
         }

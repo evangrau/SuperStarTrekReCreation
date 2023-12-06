@@ -95,9 +95,9 @@ class Commands {
             // case PHASERS:
             // execPHASERS();
             // break;
-            // case PHOTONS:
-            // execPHOTONS();
-            // break;
+            case PHOTONS:
+                execPHOTONS(con);
+                break;
             case MOVE:
                 execMOVE(con, ship, map);
                 break;
@@ -107,9 +107,9 @@ class Commands {
             // case DOCK:
             // execDOCK();
             // break;
-            // case DAMAGES:
-            // execDAMAGES();
-            // break;
+            case DAMAGES:
+                execDAMAGES(con);
+                break;
             case CHART:
                 execCHART(con, ship, map);
                 break;
@@ -285,6 +285,14 @@ class Commands {
         ship.print();
     }
 
+    static void execPHOTONS(Console con) {
+        Photons.fire(con);
+    }
+
+    static void execDAMAGES(Console con) {
+        Damages.damageReport(con);
+    }
+
     static void execCOMPUTER(Console con) {
 
         con.printf("Destination quadrant and/or sector? \n");
@@ -350,7 +358,7 @@ class Commands {
 
     static void huh(Console con) {
         CmdProc.flushTok();
-        con.printf("Beg your pardon, Captain?\n");
+        con.printf("\nBeg your pardon, Captain?\n\n");
     }
 
     static void execCHART(Console con, Ship ship, Map map) {
