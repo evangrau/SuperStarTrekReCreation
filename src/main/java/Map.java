@@ -10,8 +10,7 @@ class Map {
     public char[][][][] globalMap;
     public int klingonCount = 0;
 
-    private double starbaseRate = 0.01, klingonRate = 0.02, commanderRate = 0.005, supercommanderRate = 0.001,
-            planetRate = 0.005, romulonRate = 0.005, starRate = 0.1;
+    private double starbaseRate = 0.001, klingonRate = 0.002, planetRate = 0.005, starRate = 0.01;
     private static Random rand = new Random();
 
     public Map(int qSize, int sSize) {
@@ -41,16 +40,8 @@ class Map {
                         } else if (Math.random() < klingonRate) {
                             globalMap[i][j][k][l] = 'K';
                             klingonCount++;
-                        } else if (Math.random() < commanderRate) {
-                            globalMap[i][j][k][l] = 'C';
-                            klingonCount++;
-                        } else if (Math.random() < supercommanderRate) {
-                            globalMap[i][j][k][l] = 'S';
-                            klingonCount++;
                         } else if (Math.random() < planetRate) {
                             globalMap[i][j][k][l] = 'P';
-                        } else if (Math.random() < romulonRate) {
-                            globalMap[i][j][k][l] = 'R';
                         } else if (Math.random() < starRate) {
                             globalMap[i][j][k][l] = '*';
                         } else {
@@ -68,5 +59,9 @@ class Map {
 
     public void updateShip(Ship ship, Console con) {
         globalMap[ship.getXQuad()][ship.getYQuad()][ship.getXSect()][ship.getYSect()] = 'E';
+    }
+
+    public int checkKlingonCount(Console con) {
+        return klingonCount;
     }
 }

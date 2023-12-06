@@ -7,6 +7,11 @@ public class lrscan {
     private static Ship lr_ship = SST.ship;
 
     public static void lrReport(Console con) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                lrScan[i][j] = "0";
+            }
+        }
         int xQuad = lr_ship.getXQuad();
         int yQuad = lr_ship.getYQuad();
         con.printf("\nLong-range scan for Quadrant %d - %d\n\n", xQuad, yQuad);
@@ -20,6 +25,17 @@ public class lrscan {
         if (yQuad == 1) {
             for (int i = 0; i < lrScan.length; i++) {
                 lrScan[i][0] = "-1";
+            }
+        }
+        if (xQuad == 8) {
+            for (int i = 0; i < lrScan.length; i++) {
+                lrScan[2][i] = "-1";
+            }
+        }
+
+        if (yQuad == 8) {
+            for (int i = 0; i < lrScan.length; i++) {
+                lrScan[i][2] = "-1";
             }
         }
 

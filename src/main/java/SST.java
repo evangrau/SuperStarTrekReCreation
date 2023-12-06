@@ -42,6 +42,9 @@ class SST {
         con.printf("\n *** Welcome aboard the USS Enterprise (NCC 1701) *** \n\n");
 
         while (true) {
+            if (map.checkKlingonCount(con) == 0) {
+                con.printf("All Klingons Defeated!\nVictory!");
+            }
             con.printf("COMMAND> ");
             Token tkn = CmdProc.getToken();
             if (tkn.getType() == TokenType.EOL)
