@@ -30,10 +30,10 @@ class Ship {
     }
 
     public void move(int qx, int qy, int sx, int sy) {
-        quadx += qx;
-        quady += qy;
-        sectx += sx;
-        secty += sy;
+        quadx = qx;
+        quady = qy;
+        sectx = sx;
+        secty = sy;
     }
 
     public int getXQuad() {

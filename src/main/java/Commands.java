@@ -99,7 +99,7 @@ class Commands {
                 execPHOTONS(con);
                 break;
             case MOVE:
-                execMOVE(con, ship);
+                execMOVE(con, ship, map);
                 break;
             // case SHIELDS:
             // execSHIELDS();
@@ -240,11 +240,8 @@ class Commands {
         lrscan.lrReport(con);
     }
 
-    static void execMOVE(Console con, Ship ship) {
+    static void execMOVE(Console con, Ship ship, Map map) {
         ship.print();
-
-        // For testing for now, ship will just move 1, 1, 1, 1
-        // Will implement with user giving movement commands later
 
         /*
          * Testing move command with new command line parsing
@@ -252,28 +249,39 @@ class Commands {
          * with how it's implemented.
          * Use this as an example of how to implement it.
          */
-        Token tkn = CmdProc.getToken();
         int[] coords = new int[4];
         int next = 0;
+        Token tkn = CmdProc.getToken();
 
+        // end of line character
         if (tkn.getType() == TokenType.EOL) {
             // wait for user input
             con.printf("Move to which quadrant and which sector? \n");
             tkn = CmdProc.getToken();
         }
 
+        // alpha character
         if (tkn.getType() == TokenType.ALPHA) {
             huh(con);
             return;
         }
 
+        // reading number input
         while (tkn.getType() != TokenType.EOL) {
             coords[next++] = (int) tkn.getDouble();
             tkn = CmdProc.getToken();
         }
 
-        // ship.move(1, 1, 1, 1);
+        // invalid destination entered
+        if (coords[0] < 1 || coords[0] > 8 || coords[1] < 1 || coords[1] > 8 ||
+                coords[2] < 1 || coords[2] > 10 || coords[3] < 1 || coords[3] > 10) {
+            con.printf("Invalid destination \n");
+            execMOVE(con, ship, map);
+            return;
+        }
+        map.removeShip(ship, con);
         ship.move(coords[0], coords[1], coords[2], coords[3]);
+        map.updateShip(ship, con);
         ship.print();
     }
 
