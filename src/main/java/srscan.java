@@ -66,7 +66,7 @@ public class srscan {
                         con.printf("Warp Factor   %.1f", 5.0);
                         break;
                     case 6:
-                        con.printf("Energy        %.2f", 2176.24);
+                        con.printf("Energy        %.2f", Impulse.energy);
                         break;
                     case 7:
                         con.printf("Torpedoes     %d", 3);

@@ -149,9 +149,9 @@ class Commands {
             // case REQUEST:
             // execREQUEST();
             // break;
-            // case REPORT:
-            // execREPORT();
-            // break;
+            case REPORT:
+                execREPORT();
+                break;
             case COMPUTER:
                 execCOMPUTER(con);
                 break;
@@ -376,5 +376,9 @@ class Commands {
 
     static void execIMPULSE() {
         Impulse.impulse();
+    }
+
+    static void execREPORT() {
+        Report.report();
     }
 }
