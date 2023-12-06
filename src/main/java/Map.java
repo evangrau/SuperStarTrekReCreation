@@ -57,4 +57,12 @@ class Map {
             }
         }
     }
+
+    public void removeShip(Ship ship, Console con) {
+        globalMap[ship.getXQuad()][ship.getYQuad()][ship.getXSect()][ship.getYSect()] = '.';
+    }
+
+    public void updateShip(Ship ship, Console con) {
+        globalMap[ship.getXQuad()][ship.getYQuad()][ship.getXSect()][ship.getYSect()] = 'E';
+    }
 }
