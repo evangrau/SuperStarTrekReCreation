@@ -4,11 +4,11 @@ import java.util.Random;
 public class Impulse {
     public static Damages dmgChecker;
     private static Console con;
-    private float energy = 3000;
-    private float power;
+    private static float energy = 3000;
+    private static float power;
     private static Ship ship = SST.ship;
 
-    public void impulse() {
+    public static void impulse() {
         con = System.console();
         int damaged = dmgChecker.hasDamage("Engine");
         if (damaged == 1) {

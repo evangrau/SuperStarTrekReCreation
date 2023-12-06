@@ -113,9 +113,9 @@ class Commands {
             case CHART:
                 execCHART(con, ship, map);
                 break;
-            // case IMPULSE:
-            // execIMPULSE();
-            // break;
+            case IMPULSE:
+                execIMPULSE();
+                break;
             // case REST:
             // execREST();
             // break;
@@ -220,15 +220,11 @@ class Commands {
     }
 
     static void execCOMMANDS(Console con) {
-        con.printf("   SRSCAN    MOVE      PHASERS   CALL\n");
-        con.printf("   STATUS    IMPULSE   PHOTONS   ABANDON\n");
-        con.printf("   LRSCAN    WARP      SHIELDS   DESTRUCT\n");
-        con.printf("   CHART     REST      DOCK      QUIT\n");
-        con.printf("   DAMAGES   REPORT    SENSORS   ORBIT\n");
-        con.printf("   TRANSPORT MINE      CRYSTALS  SHUTTLE\n");
-        con.printf("   PLANETS   REQUEST   DEATHRAY  FREEZE\n");
-        con.printf("   COMPUTER  EMEXIT    PROBE     COMMANDS\n");
-        con.printf("   SCORE     CLOAK     CAPTURE   HELP\n");
+        con.printf("   SRSCAN    MOVE\n");
+        con.printf("   IMPULSE   PHOTONS\n");
+        con.printf("   LRSCAN    WARP\n");
+        con.printf("   COMPUTER  COMMANDS\n");
+        con.printf("   QUIT\n");
         con.printf("\n");
     }
 
@@ -376,5 +372,9 @@ class Commands {
             }
             con.printf("\n");
         }
+    }
+
+    static void execIMPULSE() {
+        Impulse.impulse();
     }
 }
