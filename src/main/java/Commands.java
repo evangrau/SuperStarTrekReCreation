@@ -60,8 +60,8 @@ class Commands {
     // ================================================
     // legacy status variables
 
-    static double warp_factor = 5;
-    static double warp_factor_squared = 5 * 5;
+    static double warpFactor = 5;
+    static double warpFactorSquared = 5 * 5;
 
     // ================================================
 
@@ -89,33 +89,33 @@ class Commands {
             case SRSCAN:
                 execSRSCAN(con);
                 break;
-            // case LRSCAN:
-            // execLRSCAN();
-            // break;
+            case LRSCAN:
+                execLRSCAN(con);
+                break;
             // case PHASERS:
             // execPHASERS();
             // break;
-            // case PHOTONS:
-            // execPHOTONS();
-            // break;
-            // case MOVE:
-            // execMOVE(ship);
-            // break;
+            case PHOTONS:
+                execPHOTONS(con);
+                break;
+            case MOVE:
+                execMOVE(con, ship, map);
+                break;
             // case SHIELDS:
             // execSHIELDS();
             // break;
             // case DOCK:
             // execDOCK();
             // break;
-            // case DAMAGES:
-            // execDAMAGES();
-            // break;
+            case DAMAGES:
+                execDAMAGES(con);
+                break;
             case CHART:
                 execCHART(con, ship, map);
                 break;
-            // case IMPULSE:
-            // execIMPULSE();
-            // break;
+            case IMPULSE:
+                execIMPULSE();
+                break;
             // case REST:
             // execREST();
             // break;
@@ -149,9 +149,9 @@ class Commands {
             // case REQUEST:
             // execREQUEST();
             // break;
-            // case REPORT:
-            // execREPORT();
-            // break;
+            case REPORT:
+                execREPORT();
+                break;
             case COMPUTER:
                 execCOMPUTER(con);
                 break;
@@ -220,27 +220,24 @@ class Commands {
     }
 
     static void execCOMMANDS(Console con) {
-        con.printf("   SRSCAN    MOVE      PHASERS   CALL\n");
-        con.printf("   STATUS    IMPULSE   PHOTONS   ABANDON\n");
-        con.printf("   LRSCAN    WARP      SHIELDS   DESTRUCT\n");
-        con.printf("   CHART     REST      DOCK      QUIT\n");
-        con.printf("   DAMAGES   REPORT    SENSORS   ORBIT\n");
-        con.printf("   TRANSPORT MINE      CRYSTALS  SHUTTLE\n");
-        con.printf("   PLANETS   REQUEST   DEATHRAY  FREEZE\n");
-        con.printf("   COMPUTER  EMEXIT    PROBE     COMMANDS\n");
-        con.printf("   SCORE     CLOAK     CAPTURE   HELP\n");
+        con.printf("   SRSCAN    MOVE\n");
+        con.printf("   IMPULSE   PHOTONS\n");
+        con.printf("   LRSCAN    WARP\n");
+        con.printf("   COMPUTER  COMMANDS\n");
+        con.printf("   QUIT\n");
         con.printf("\n");
     }
 
     static void execSRSCAN(Console con) {
-        srscan.srReport();
+        srscan.srReport(con);
     }
 
-    static void execMOVE(Console con, Ship ship) {
-        ship.print();
+    static void execLRSCAN(Console con) {
+        lrscan.lrReport(con);
+    }
 
-        // For testing for now, ship will just move 1, 1, 1, 1
-        // Will implement with user giving movement commands later
+    static void execMOVE(Console con, Ship ship, Map map) {
+        ship.print();
 
         /*
          * Testing move command with new command line parsing
@@ -248,29 +245,48 @@ class Commands {
          * with how it's implemented.
          * Use this as an example of how to implement it.
          */
-        Token tkn = CmdProc.getToken();
         int[] coords = new int[4];
         int next = 0;
+        Token tkn = CmdProc.getToken();
 
+        // end of line character
         if (tkn.getType() == TokenType.EOL) {
             // wait for user input
             con.printf("Move to which quadrant and which sector? \n");
             tkn = CmdProc.getToken();
         }
 
+        // alpha character
         if (tkn.getType() == TokenType.ALPHA) {
             huh(con);
             return;
         }
 
+        // reading number input
         while (tkn.getType() != TokenType.EOL) {
             coords[next++] = (int) tkn.getDouble();
             tkn = CmdProc.getToken();
         }
 
-        // ship.move(1, 1, 1, 1);
+        // invalid destination entered
+        if (coords[0] < 1 || coords[0] > 8 || coords[1] < 1 || coords[1] > 8 ||
+                coords[2] < 1 || coords[2] > 10 || coords[3] < 1 || coords[3] > 10) {
+            con.printf("Invalid destination \n");
+            execMOVE(con, ship, map);
+            return;
+        }
+        map.removeShip(ship, con);
         ship.move(coords[0], coords[1], coords[2], coords[3]);
+        map.updateShip(ship, con);
         ship.print();
+    }
+
+    static void execPHOTONS(Console con) {
+        Photons.fire(con);
+    }
+
+    static void execDAMAGES(Console con) {
+        Damages.damageReport(con);
     }
 
     static void execCOMPUTER(Console con) {
@@ -309,21 +325,21 @@ class Commands {
             return;
         }
 
-        double old_warp_factor = warp_factor;
-        warp_factor = w;
-        warp_factor_squared = w * w;
+        double oldWarpFactor = warpFactor;
+        warpFactor = w;
+        warpFactorSquared = w * w;
 
-        if ((warp_factor <= old_warp_factor) || (warp_factor <= 6.0)) {
-            con.printf("Helmsman Sulu- \"Warp factor %.1f, Captain.\"\n\n", warp_factor);
+        if ((warpFactor <= oldWarpFactor) || (warpFactor <= 6.0)) {
+            con.printf("Helmsman Sulu- \"Warp factor %.1f, Captain.\"\n\n", warpFactor);
             return;
         }
 
-        if (warp_factor < 8.0) {
+        if (warpFactor < 8.0) {
             con.printf("Engineer Scott- \"Aye, but our maximum safe speed is warp 6.\"\n\n");
             return;
         }
 
-        if (warp_factor < 10.0) {
+        if (warpFactor < 10.0) {
             con.printf("Engineer Scott- \"Aye, Captain, but our engines may not take it.\"\n\n");
             return;
         }
@@ -338,11 +354,7 @@ class Commands {
 
     static void huh(Console con) {
         CmdProc.flushTok();
-        con.printf("Beg your pardon, Captain?\n");
-    }
-
-    static void execLRSCAN(Console con) { // Not yet implemented
-
+        con.printf("\nBeg your pardon, Captain?\n\n");
     }
 
     static void execCHART(Console con, Ship ship, Map map) {
@@ -360,5 +372,13 @@ class Commands {
             }
             con.printf("\n");
         }
+    }
+
+    static void execIMPULSE() {
+        Impulse.impulse();
+    }
+
+    static void execREPORT() {
+        Report.report();
     }
 }

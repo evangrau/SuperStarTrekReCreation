@@ -3,12 +3,10 @@ import java.util.Arrays;
 
 public class srscan {
     private static char[][] srScan = new char[10][10]; // minor inefficiency here
-    private static Console con;
     private static char[][][][] fullMap = SST.map.getMap();
     private static Ship sr_ship = SST.ship;
 
-    public static void srReport() {
-        con = System.console();
+    public static void srReport(Console con) {
         int XQuad = sr_ship.getXQuad();
         int YQuad = sr_ship.getYQuad();
 
@@ -44,7 +42,7 @@ public class srscan {
                 con.printf("    %2d  ", r);
 
                 for (c = 1; c <= 10; c++)
-                    con.printf("%c ", srScan[r - 1][c - 1]);
+                    con.printf("%c ", srScan[r][c]);
             }
 
             if (rightside) {
@@ -68,7 +66,7 @@ public class srscan {
                         con.printf("Warp Factor   %.1f", 5.0);
                         break;
                     case 6:
-                        con.printf("Energy        %.2f", 2176.24);
+                        con.printf("Energy        %.2f", Impulse.energy);
                         break;
                     case 7:
                         con.printf("Torpedoes     %d", 3);

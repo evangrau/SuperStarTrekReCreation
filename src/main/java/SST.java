@@ -32,10 +32,9 @@ class SST {
 
     public static void main(String[] args) {
         // main polling loop
-
-        map.populate(ship.getXQuad(), ship.getYQuad(), ship.getXSect(), ship.getYSect());
-
         con = System.console();
+        map.populate(ship.getXQuad(), ship.getYQuad(), ship.getXSect(), ship.getYSect(), con);
+
         if (con == null)
             return;
 
@@ -43,6 +42,9 @@ class SST {
         con.printf("\n *** Welcome aboard the USS Enterprise (NCC 1701) *** \n\n");
 
         while (true) {
+            if (map.checkKlingonCount(con) == 0) {
+                con.printf("All Klingons Defeated!\nVictory!");
+            }
             con.printf("COMMAND> ");
             Token tkn = CmdProc.getToken();
             if (tkn.getType() == TokenType.EOL)
@@ -54,5 +56,13 @@ class SST {
 
             CmdProc.flushTok();
         }
+    }
+
+    public int getQuadSize() {
+        return QUAD_SIZE;
+    }
+
+    public int getSectSize() {
+        return SECT_SIZE;
     }
 }
