@@ -107,9 +107,9 @@ class Commands {
             // case DOCK:
             // execDOCK();
             // break;
-            // case DAMAGES:
-            // execDAMAGES();
-            // break;
+            case DAMAGES:
+                execDAMAGES(con);
+                break;
             case CHART:
                 execCHART(con, ship, map);
                 break;
@@ -279,6 +279,10 @@ class Commands {
 
     static void execPHOTONS(Console con) {
         Photons.fire(con);
+    }
+
+    static void execDAMAGES(Console con) {
+        Damages.damageReport(con);
     }
 
     static void execCOMPUTER(Console con) {
