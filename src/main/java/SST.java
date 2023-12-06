@@ -32,10 +32,9 @@ class SST {
 
     public static void main(String[] args) {
         // main polling loop
-
-        map.populate(ship.getXQuad(), ship.getYQuad(), ship.getXSect(), ship.getYSect());
-
         con = System.console();
+        map.populate(ship.getXQuad(), ship.getYQuad(), ship.getXSect(), ship.getYSect(), con);
+
         if (con == null)
             return;
 
