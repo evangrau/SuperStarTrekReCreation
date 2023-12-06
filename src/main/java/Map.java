@@ -10,7 +10,7 @@ class Map {
     public char[][][][] globalMap;
     public int klingonCount = 0;
 
-    private double starbaseRate = 0.001, klingonRate = 0.002, planetRate = 0.005, starRate = 0.01;
+    private double starbaseRate = 0.001, klingonRate = 0.008, planetRate = 0.005, starRate = 0.06;
     private static Random rand = new Random();
 
     public Map(int qSize, int sSize) {
